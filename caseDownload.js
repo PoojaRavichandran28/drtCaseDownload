@@ -1,15 +1,14 @@
 const cheerio = require('cheerio')
 const request = require('request')
 
-const url = 'http://drt.etribunals.gov.in/drtlive/partyDetail.php?caseNo=120&caseType=7&year=2017&sc=delhi2&id=casetypewise'
 
-async function getCaseDetails(url) {
+
+exports.getCaseDetails = async function(url) {
     let page = await fetchPage(url)
     let link = getLink(page)
     let casePage = await fetchPage(link)
     let details = getDetails(casePage)
     return details
-    
 }
 
 function fetchPage(url) {
@@ -28,8 +27,8 @@ function getLink(page) {
          console.log('Page does not exist')
      }
      else {
-         endPoint = $('a').attr().href.match(/'(.*?)'/g).map(el => el.replace(/'*/g,''))[0]
-    }
+         endPoint = $('td').find('a').attr('href').match(/'(.*?)'/g)[0].replace(/'*/g,'')
+        }
      return 'http://drt.etribunals.gov.in/drtlive/Misdetailreport.php?no='+endPoint
 }
 
@@ -114,10 +113,3 @@ function getRespondentDetails(caseDetails, details) {
         caseDetails[resAdvKey] = resAdvValue
         return caseDetails
 }
-
-async function execute() {
-    let result = await getCaseDetails(url)
-    console.log(result)
-}
-
-execute()

@@ -14,7 +14,7 @@ const options = {
     }
 }
 
-async function getDailyOrders() {
+async function getDailyOrdersLink() {
     let page = await fetchPage()
     let pdfEndpoint = parsePdfEndpoint(page)
     let pdfLink = buildPdfLink(pdfEndpoint)
@@ -45,7 +45,7 @@ function buildPdfLink(pdfEndpoint) {
 }
 
 async function execute() {
-    let result = await getDailyOrders()
+    let result = await getDailyOrdersLink()
     console.log(result)
 }
 
