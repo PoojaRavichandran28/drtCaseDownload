@@ -5,7 +5,7 @@ async function execute() {
     let cdl = await caseDownload.getCaseDetails(url)
     let dor = await dailyOrder.getDailyOrder()
     cdl['dailyOrders'] = dor
-    console.log(JSON.stringify(cdl))
+    console.log(cdl)
 }
 
 execute()

@@ -1,0 +1,53 @@
+[{
+    "value": "Original Application",
+    "key": "OA",
+    "remoteKey": "1"
+}, {
+    "value": "Review Application",
+    "key": "RA",
+    "remoteKey": "2"
+}, {
+    "value": "Misc Application",
+    "key": "MA",
+    "remoteKey": "3"
+}, {
+    "value": "Appeal",
+    "key": "Appeal",
+    "remoteKey": "4"
+}, {
+    "value": "URA",
+    "key": "URA",
+    "remoteKey": "5"
+}, {
+    "value": "TA",
+    "key": "TA",
+    "remoteKey": "6"
+}, {
+    "value": "SA",
+    "key": "SA",
+    "remoteKey": "7"
+}, {
+    "value": "AIR",
+    "key": "AIR",
+    "remoteKey": "8"
+}, {
+    "value": "CC",
+    "key": "CC",
+    "remoteKey": "10"
+}, {
+    "value": "TSA",
+    "key": "TSA",
+    "remoteKey": "11"
+}, {
+    "value": "TRC",
+    "key": "TRC",
+    "remoteKey": "12"
+}, {
+    "value": " EX",
+    "key": "EX",
+    "remoteKey": "13"
+}, {
+    "value": "CA",
+    "key": "CA",
+    "remoteKey": "14"
+}]

@@ -1,13 +1,14 @@
 const cheerio = require('cheerio')
 const request = require('request')
 
-
-
 exports.getCaseDetails = async function(url) {
     let page = await fetchPage(url)
     let link = getLink(page)
     let casePage = await fetchPage(link)
     let details = getDetails(casePage)
+    // let cKey = keys[keys.indexOf('Case Type/Case No/Year')].replace('Case Type/Case No/Year','caseNumber')
+    // details[cKey] = details[keys[keys.indexOf('Case Type/Case No/Year')]]
+    // delete details[keys[keys.indexOf('Case Type/Case No/Year')]]
     return details
 }
 
@@ -37,21 +38,21 @@ function getDetails(casePage) {
     let caseDetails = {}
     let details = []
     let caseProceedings = []
-    $('table').each((i,table) => {
-            if (i === 0 || i === 3 || i ===4) {
+    $('table').each((tn,table) => {
+            if (tn === 0 || tn === 3 || tn ===4) {
                 const rows  = $(table).find('tr')
-                rows.each((j, row) => {
+                rows.each((rn, row) => {
                     const cols = $(row).find('td')
-                    if (i === 0) {
-                        let key = $(cols[0]).text().split('/').length === 2 ? $(cols[0]).text().split('/')[0] : $(cols[0]).text()
+                    if (tn === 0) {
+                        let key = $(cols[0]).text().split('/').length === 2 ? $(cols[0]).text().split('/')[0] : $(cols[0]).text().split('/').length === 3 ? 'caseNumber' : $(cols[0]).text()
                         let value = $(cols[1]).text()
                         if (value.trim())
                         caseDetails[key] = value
-                    } else if (i === 3) {
+                    } else if (tn === 3) {
                         if($(row).text().includes('Petitioner Name') || $(row).text().includes('Respondent Name'))
                         details.push($(row).text().replace(/\n/g,'').replace(/\s+/g,' '))
-                    } else if (i ===4) {
-                        if(j!==0 && j!==1 && j!==rows.length-1){
+                    } else if (tn ===4) {
+                        if(rn!==0 && rn!==1 && rn!==rows.length-1){
                             let caseProceedingElement = {}
                             caseProceedingElement['Bench No'] = $(cols[0]).text()
                             let date = new Date($(cols[1]).text())
@@ -88,7 +89,7 @@ function getPetitionerDetails(caseDetails, details) {
                  .split(',')
                  .map(el => el.trim())
         let petAdvKey = 'pAdvocate'
-        let petAdvValue = petAdv.slice(0,petAdv.length-1)
+        let petAdvValue = petAdv[0] === '' ? [] : petAdv.slice(0,petAdv.length-1)
         caseDetails[petKey] = petValue
         caseDetails[petAdvKey] = petAdvValue
         return caseDetails
@@ -108,7 +109,7 @@ function getRespondentDetails(caseDetails, details) {
                 .split(',')
                 .map(el => el.trim())
         let resAdvKey = 'rAdvocate'
-        let resAdvValue = resAdv.slice(0,resAdv.length-1)
+        let resAdvValue = resAdv[0] === '' ? [] : resAdv.slice(0,resAdv.length-1)
         caseDetails[resKey] = resValue
         caseDetails[resAdvKey] = resAdvValue
         return caseDetails
