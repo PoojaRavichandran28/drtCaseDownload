@@ -1,7 +1,7 @@
 const cheerio = require('cheerio')
 const request = require('request')
 
-const url = 'http://www.drt3chennai.tn.nic.in/CauseLists.htm'
+const url = 'http://drtcbe.tn.nic.in/po_court.htm'
 
 async function getListedDates(url) {
     let page = await fetchPage(url)
@@ -23,10 +23,13 @@ function parseDates(page) {
     let listedDates = []
     let today = new Date()
     today.setHours(0, 0, 0, 0)
-    $('select').find('option').each((i,op) => {
-      let date = new Date($(op).text())
+    $($('select')[0]).find('option').each((i,op) => {
+      let rawDate = $(op).text().replace(',','').trim()
+      let [dd,mm,yyyy] = rawDate.split(' ')
+      let newdd = dd.replace(/st|th|rd|nd/igm,'')
+      let date = new Date(`${newdd} ${mm} ${yyyy}`)
       if(date >= today)
-      listedDates.push($(op).text())
+      listedDates.push(date)
     })
     return listedDates
 }

@@ -1,9 +1,9 @@
 let caseSearch = require('./caseNoSearch')
 let partySearch = require('./partySearch')
 let advocateSearch = require('./advSearch')
-const caseNoSearchUrl = 'http://drt.etribunals.gov.in/drtlive/partyDetail.php?caseNo=120&caseType=1&year=2017&sc=delhi&id=casetypewise'
+const caseNoSearchUrl = 'http://drt.etribunals.gov.in/drtlive/partyDetail.php?caseNo=1548&caseType=1&year=2018&sc=ahmedabad2&id=casetypewise'
 const ptySearchUrl = 'http://drt.etribunals.gov.in/drtlive/partyDetail.php?caseNo=KAMAL%20&caseType=3&sc=delhi&id=partynamewise'
-const advSearchUrl = 'http://drt.etribunals.gov.in/drtlive/partyDetail.php?nameAdv=raja&AdvocateType=1&sc=bangalore1&id=advnamewise'
+const advSearchUrl = 'http://drt.etribunals.gov.in/drtlive/partyDetail.php?nameAdv=N%20RAVI%20PRASAD&AdvocateType=1&sc=visakhapatnam&id=advnamewise'
 
 async function execute() {
     let caseNoSearch = await caseSearch.getCaseDetails(caseNoSearchUrl)

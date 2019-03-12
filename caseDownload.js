@@ -29,6 +29,7 @@ function getLink(page) {
      else {
          endPoint = $('td').find('a').attr('href').match(/'(.*?)'/g)[0].replace(/'*/g,'')
         }
+    console.log(endPoint)
      return 'http://drt.etribunals.gov.in/drtlive/Misdetailreport.php?no='+endPoint
 }
 
@@ -43,7 +44,7 @@ function getDetails(casePage) {
                 rows.each((j, row) => {
                     const cols = $(row).find('td')
                     if (i === 0) {
-                        let key = $(cols[0]).text().split('/').length === 2 ? $(cols[0]).text().split('/')[0] : $(cols[0]).text()
+                        let key = $(cols[0]).text().split('/').length === 2 ? $(cols[0]).text().split('/')[0] : $(cols[0]).text().split('/').length === 3 ? 'caseNumber' : $(cols[0]).text()
                         let value = $(cols[1]).text()
                         if (value.trim())
                         caseDetails[key] = value
