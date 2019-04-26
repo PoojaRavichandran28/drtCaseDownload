@@ -3,8 +3,8 @@ const request = require('request')
 const url = 'https://nclt.gov.in/pdf-cause-list?field_bench_target_id=5365&field_bench_court_target_id_entityreference_filter=5379' 
 
 async function nclt(url) {
+    console.log(url)
     let page = await fetchPage(url)
-    console.log(page)
     let details = getClistDate(page)
     console.log(details)
     return details
@@ -13,6 +13,7 @@ async function nclt(url) {
 function fetchPage(url) {
     return new Promise((resolve, reject) => {
         request(url,(err,res,body) => {
+            console.log(err)
             if(err) reject(err)
             resolve(body)
         })
